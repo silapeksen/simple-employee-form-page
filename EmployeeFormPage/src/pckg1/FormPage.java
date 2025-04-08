@@ -141,15 +141,14 @@ public class FormPage extends JFrame {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				int id = Integer.parseInt(txtEmployeeId.getText());
 				String name = txtName.getText();
 				String surname = txtSurname.getText();
 				String gender = genderGroup.getSelection().getActionCommand();
 				int age = Integer.parseInt(cbAge.getSelectedItem().toString());
 				String department = cbDepartment.getSelectedItem().toString();
 				
-				String strId = txtEmployeeId.getText();//For using the isEmpty() function, it is for strings.
-				if (strId.isEmpty()) {
+				String strId = txtEmployeeId.getText().trim();//For using the isEmpty() function, it is for strings.
+				if (strId.equals("")) {
 					JOptionPane.showMessageDialog(contentPane, "Employee ID cannot be empty");
 				}
 				else if (employees.stream()
@@ -159,7 +158,7 @@ public class FormPage extends JFrame {
 					JOptionPane.showMessageDialog(contentPane, "Invalid ID!");
 				}
 				else {
-					Employee emp = new Employee(id, name, surname, gender, department, age);
+					Employee emp = new Employee(Integer.parseInt(txtEmployeeId.getText()), name, surname, gender, department, age);
 					employees.add(emp);
 					JOptionPane.showMessageDialog(contentPane, "Employee saved!");					
 				}
